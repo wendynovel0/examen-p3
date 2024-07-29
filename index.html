@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+    <title>Ejercicios de JavaScript</title>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            overflow: auto;
+        }
+        body::-webkit-scrollbar{
+            display: none;
+        }
+        .container {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 30px;
+            color: #fff;
+            text-shadow: 1px 1px 1px #cc5854, 2px 2px 2px #cc5854, 3px 3px 3px #cc5854;
+        }
+        input, button {
+            margin: 5px;
+            padding: 5px 10px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #FF6F69;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #cc5854;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+            padding: 5px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-card, .object-card {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .user-card h3, .object-card h3 {
+            margin: 0 0 10px;
+        }
+        .result {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .result-item {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .object-card {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+
+        .container{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="ejercicio1">
+        <h2>Ejercicio 1: Filtro de Arreglos</h2>
+        <button onclick="mostrarTodos()">Mostrar Todos</button>
+        <button onclick="mostrarMayoresDeEdad()">Mostrar Mayores de Edad</button>
+        <button onclick="ocultarResultadoEjercicio1()">Ocultar Resultado</button>
+        <div id="resultadoEjercicio1" class="result"></div>
+    </div>
+
+    <div class="container" id="ejercicio2">
+        <h2>Ejercicio 2: Transformar y Filtrar Arreglos</h2>
+        <button onclick="mostrarCuadrados()">Mostrar Cuadrados Mayores de 20</button>
+        <button onclick="ocultarCuadrados()">Ocultar Cuadrados</button>
+        <div id="resultadoEjercicio2" class="result"></div>
+    </div>
+
+    <div class="container" id="ejercicio3">
+        <h2>Ejercicio 3: Promesas y Asincronía</h2>
+        <button onclick="obtenerUsuarios()">Obtener Usuarios</button>
+        <button onclick="ocultarUsuarios()">Ocultar Usuarios</button>
+        <div id="resultadoEjercicio3"></div>
+    </div>
+
+    <div class="container" id="ejercicio4">
+        <h2>Ejercicio 4: Manipulación Compleja del DOM</h2>
+        <input type="text" id="nuevoItemTexto" placeholder="Nuevo ítem">
+        <button id="agregarBtn">Agregar ítem</button>
+        <ul id="lista">
+            <li>Elemento por defecto 1<button class="eliminarBtn">Eliminar</button></li>
+            <li>Elemento por defecto 2<button class="eliminarBtn">Eliminar</button></li>
+            <li>Elemento por defecto 3<button class="eliminarBtn">Eliminar</button></li>
+        </ul>
+        <button onclick="eliminarItemsPorDefecto()">Eliminar Items por Defecto</button>
+    </div>
+
+    <div class="container" id="ejercicio5">
+        <h2>Ejercicio 5: Algoritmos y Estructuras de Datos</h2>
+        <input type="text" id="propiedadOrden" placeholder="Propiedad por la que ordenar (e.g., edad)">
+        <button onclick="ordenarPor()">Ordenar</button>
+        <button onclick="ocultarResultadoEjercicio5()">Ocultar Resultado</button>
+        <div id="objetosIniciales"></div>
+        <div id="resultadoEjercicio5" class="result"></div>
+    </div>
+
+    <script>
+        // Ejercicio 1: Filtro de Arreglos
+        function filtrarMayoresDeEdad(personas) {
+            return personas.filter(persona => persona.edad >= 18);
+        }
+
+        const personas = [
+            { nombre: 'Juan', edad: 15 },
+            { nombre: 'Ana', edad: 22 },
+            { nombre: 'Luis', edad: 18 },
+            { nombre: 'María', edad: 17 }
+        ];
+
+        function mostrarTodos() {
+            const resultado = personas.map(persona => `<div class="result-item">${persona.nombre} (${persona.edad} años)</div>`);
+            document.getElementById('resultadoEjercicio1').innerHTML = resultado.join('');
+        }
+
+        function mostrarMayoresDeEdad() {
+            const resultado = filtrarMayoresDeEdad(personas).map(persona => `<div class="result-item">${persona.nombre} (${persona.edad} años)</div>`);
+            document.getElementById('resultadoEjercicio1').innerHTML = resultado.join('');
+        }
+
+        function ocultarResultadoEjercicio1() {
+            document.getElementById('resultadoEjercicio1').innerHTML = '';
+        }
+
+        // Ejercicio 2: Transformar y Filtrar Arreglos
+        function transformarYFiltrar(numeros) {
+            return numeros.map(num => num * num).filter(cuadrado => cuadrado > 20);
+        }
+
+        const numeros = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+        function mostrarCuadrados() {
+            const resultado = transformarYFiltrar(numeros).map(num => `<div class="result-item">${num}</div>`);
+            document.getElementById('resultadoEjercicio2').innerHTML = resultado.join('');
+        }
+
+        function ocultarCuadrados() {
+            document.getElementById('resultadoEjercicio2').innerHTML = '';
+        }
+
+        // Ejercicio 3: Promesas y Asincronía
+        async function obtenerUsuarios() {
+            try {
+                const respuesta = await fetch('https://jsonplaceholder.typicode.com/users');
+                if (!respuesta.ok) {
+                    throw new Error('Error al obtener los datos');
+                }
+                const datos = await respuesta.json();
+                const usuariosHTML = datos.map(usuario => `
+                    <div class="user-card">
+                        <h3>${usuario.name}</h3>
+                        <p><strong>Email:</strong> ${usuario.email}</p>
+                        <p><strong>Teléfono:</strong> ${usuario.phone}</p>
+                        <p><strong>Empresa:</strong> ${usuario.company.name}</p>
+                    </div>
+                `).join('');
+                document.getElementById('resultadoEjercicio3').innerHTML = usuariosHTML;
+            } catch (error) {
+                console.error('Hubo un problema con la solicitud fetch:', error);
+                document.getElementById('resultadoEjercicio3').textContent = 'Hubo un problema con la solicitud fetch: ' + error.message;
+            }
+        }
+
+        function ocultarUsuarios() {
+            document.getElementById('resultadoEjercicio3').innerHTML = '';
+        }
+
+        // Ejercicio 4: Manipulación Compleja del DOM
+        document.getElementById('agregarBtn').addEventListener('click', () => {
+            const textoNuevoItem = document.getElementById('nuevoItemTexto').value;
+            if (textoNuevoItem.trim() !== '') {
+                const lista = document.getElementById('lista');
+                const nuevoItem = document.createElement('li');
+                nuevoItem.textContent = textoNuevoItem;
+
+                const botonEliminar = document.createElement('button');
+                botonEliminar.textContent = 'Eliminar';
+                botonEliminar.className = 'eliminarBtn';
+                botonEliminar.addEventListener('click', () => {
+                    lista.removeChild(nuevoItem);
+                });
+
+                nuevoItem.appendChild(botonEliminar);
+                lista.appendChild(nuevoItem);
+
+                // Limpiar el input
+                document.getElementById('nuevoItemTexto').value = '';
+            }
+        });
+
+        function eliminarItemsPorDefecto() {
+            const lista = document.getElementById('lista');
+            const itemsPorDefecto = lista.querySelectorAll('li');
+            itemsPorDefecto.forEach(item => lista.removeChild(item));
+        }
+
+        // Ejercicio 5: Algoritmos y Estructuras de Datos
+        const objetos = [
+            { nombre: 'Juan', edad: 25 },
+            { nombre: 'Ana', edad: 22 },
+            { nombre: 'Luis', edad: 18 },
+            { nombre: 'María', edad: 17 }
+        ];
+
+        function mostrarObjetosIniciales() {
+            const resultado = objetos.map(objeto => `
+                <div class="object-card">
+                    <h3>${objeto.nombre}</h3>
+                    <p><strong>Edad:</strong> ${objeto.edad}</p>
+                </div>
+            `);
+            document.getElementById('objetosIniciales').innerHTML = resultado.join('');
+        }
+        mostrarObjetosIniciales();  // Llamada inicial para mostrar todos los objetos
+
+        function ordenarPorPropiedad(arreglo, propiedad) {
+            return [...arreglo].sort((a, b) => {
+                if (a[propiedad] < b[propiedad]) {
+                    return -1;
+                }
+                if (a[propiedad] > b[propiedad]) {
+                    return 1;
+                }
+                return 0;
+            });
+        }
+
+        function ordenarPor() {
+            const propiedad = document.getElementById('propiedadOrden').value;
+            if (propiedad) {
+                const resultadoOrdenado = ordenarPorPropiedad(objetos, propiedad);
+                const resultadoHTML = resultadoOrdenado.map(objeto => `
+                    <div class="object-card">
+                        <h3>${objeto.nombre}</h3>
+                        <p><strong>Edad:</strong> ${objeto.edad}</p>
+                    </div>
+                `);
+                document.getElementById('resultadoEjercicio5').innerHTML = resultadoHTML.join('');
+            } else {
+                document.getElementById('resultadoEjercicio5').textContent = 'Por favor, ingresa una propiedad para ordenar.';
+            }
+        }
+
+        function ocultarResultadoEjercicio5() {
+            document.getElementById('resultadoEjercicio5').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
